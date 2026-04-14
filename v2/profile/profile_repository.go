@@ -260,6 +260,7 @@ func downloadProfileContent(ctx context.Context, url string) (*request.Response,
 			if err1 != nil {
 				return nil, fmt.Errorf("%v,error running instance: %v", err, err1)
 			}
+			defer instance.Close()
 			instance.PingCloudflare()
 			resp, err1 = request.Send(request.Request{
 				Url:       url,
